@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MainPage from './components/MainPage/MainPage';
+import Aux from './hoc/Aux';
 
 class App extends Component {
 
@@ -20,12 +21,14 @@ class App extends Component {
     }
   
     getInfoWithCoords = (latitude, longitude) => {
-      console.log('getInfoWithLatlong used!!')
+      // corriger précision geolocalisation manuellement
+      latitude -= 0.120988;
+      longitude += 0.0722;
+
       let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${this.state.apiKey}`
       fetch(url)
       .then((response) => ( response.json()))
       .then((data) => {
-        console.log(data)
         this.setState({weatherData: data})
       })
       .catch((e) => console.log(e))
@@ -46,16 +49,22 @@ class App extends Component {
     }
 
     geolocationAllowed = (position) => {
-      console.log(position);
       this.setState({geolocation: true});
+
       // make a call using user provided longitude and latitude
       this.getInfoWithCoords(position.coords.latitude, position.coords.longitude)      
       }
     
 
   render(){
-    return (
-      < MainPage weatherData={this.state.weatherData}/>
+     let mainPage = this.state.weatherData ? 
+     <MainPage weatherData={this.state.weatherData} /> : <h1>Loading</h1> ;
+    
+    
+     return (
+       <Aux>
+        {mainPage}
+      </Aux>
     )
   }
 }
