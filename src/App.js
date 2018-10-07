@@ -36,8 +36,6 @@ class App extends Component {
       this.setState({geolocation: true});
     }
 
-
-
   render(){
     return <h1>hello</h1>
   }
