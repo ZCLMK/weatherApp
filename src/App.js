@@ -1,27 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+
+  state = {
+    apiKey: "a60fc722ff878a98f10dc57fc7badffb",
+    geolocation : false
+  }
+
+  componentDidMount() {
+
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Minsk&APPID=${this.state.apiKey}`)
+        .then((response) => ( response.json()))
+        .then((data) => console.log(data))
+        .catch((e) => console.log(e))
+    
+        this.askForPosition();
+    }
+  
+
+    askForPosition = () => {
+  
+      function errorCallback(error) {
+       console.error(error.message);
+      };
+
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(this.geolocationAllowed, errorCallback)
+      } else {
+        console.log('Pas de géolocalisation pour toi connard')
+      }
+    }
+
+    geolocationAllowed = (position) => {
+      console.log(position);
+      this.setState({geolocation: true});
+    }
+
+
+
+  render(){
+    return <h1>hello</h1>
   }
 }
 
