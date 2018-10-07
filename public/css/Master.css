@@ -69,3 +69,21 @@ body {
 
 h1 {
   font-size: 1.6em; }
+
+#day-picker {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+
+#day-tab {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #01335c;
+  border: .5px solid white;
+  border-radius: 5px;
+  font-size: .85em; }

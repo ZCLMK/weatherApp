@@ -5,7 +5,8 @@ import DayPicker from "./DayPicker";
 class MainPage extends Component {
 
       state = {
-        sortedData: null
+        sortedData: null,
+        isToday: true
       }
 
   componentWillMount() {
@@ -13,13 +14,12 @@ class MainPage extends Component {
   }
   
   sortDataByDate = () => {
-    let data = this.props.weatherData.list;
+    const data = this.props.weatherData.list;
     let counter = 0;
     console.log(data)
     let sortedData = {0: [], 1:[], 2:[], 3:[], 4:[], 5:[]};
      // put first day's data in day1, to be used as a reference
     sortedData[0].push(data[0]);
-    console.log(sortedData)
 
     // We exclude the first day's data, already put away in sortedData
     let dataExceptFirst = data.slice(1);
@@ -36,7 +36,6 @@ class MainPage extends Component {
   sortedData[0] = data.slice(0, 7);
   // update state
   this.setState({sortedData}, () => {
-
     this.formatDate(this.state.sortedData[0][0])
   });
 

@@ -9,7 +9,13 @@ render(){
         return (
           <div id="day-tab" key={index}>
              <p id="day-date">
-             {this.props.formatDate(item[0])}
+             {this.props.formatDate(item[0]).split(' ')[0]}
+             </p> 
+             <p id="day-date">
+             {this.props.formatDate(item[0]).split(' ')[1]}
+             </p> 
+             <p id="day-date">
+             {this.props.formatDate(item[0]).split(' ')[2]}
              </p> 
           </div>
         )  
