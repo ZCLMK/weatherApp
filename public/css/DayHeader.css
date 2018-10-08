@@ -1,0 +1,9 @@
+#day-header {
+  border: white solid 1px;
+  height: 35vh;
+  width: 100%; }
+  #day-header img {
+    height: 60px;
+    width: 60px;
+    min-width: 60px;
+    min-height: 60px; }

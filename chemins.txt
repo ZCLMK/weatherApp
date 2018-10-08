@@ -2,3 +2,10 @@ DATE :
 
 chemin: 
 date.toLocaleDateString('fr-FR', {weekday: "long", year: "numeric", month: "long", day: "numeric"})
+
+clear sky
+02d.png  	02n.png  	
+03d.png  	03n.png  	
+04d.png  	04n.png  	
+09d.png  	09n.png  	
+10d.png  	10n.png  	.png  	11n.png  	.png  	13n.png  	.png  	50n.png  	

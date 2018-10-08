@@ -44,7 +44,7 @@ table {
   border-spacing: 0; }
 
 body {
-  background-color: black;
+  background-color: #7c7ee4;
   color: white;
   position: absolute;
   top: 0;
@@ -69,6 +69,16 @@ body {
 
 h1 {
   font-size: 1.6em; }
+
+#day-header {
+  border: white solid 1px;
+  height: 35vh;
+  width: 100%; }
+  #day-header img {
+    height: 60px;
+    width: 60px;
+    min-width: 60px;
+    min-height: 60px; }
 
 #day-picker {
   width: 100%;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PageHeader from "./PageHeader";
 import DayPicker from "./DayPicker";
+import DayHeader from './DayHeader';
 
 class MainPage extends Component {
 
@@ -16,7 +17,7 @@ class MainPage extends Component {
   sortDataByDate = () => {
     const data = this.props.weatherData.list;
     let counter = 0;
-    console.log(data)
+    // console.log(data)
     let sortedData = {0: [], 1:[], 2:[], 3:[], 4:[], 5:[]};
      // put first day's data in day1, to be used as a reference
     sortedData[0].push(data[0]);
@@ -56,6 +57,7 @@ formatDate = (dataItem) => {
     <div id="main-page">
        <PageHeader currentCity={this.props.weatherData.city.name}/> 
        <DayPicker sortedData={this.state.sortedData} formatDate={this.formatDate} /> 
+       <DayHeader sortedData={this.state.sortedData} />
     </div>
     )
   }

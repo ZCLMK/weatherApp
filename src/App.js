@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MainPage from './components/MainPage/MainPage';
 import Aux from './hoc/Aux';
+import detectBrowser from './detectBrowser.js';
+
 
 class App extends Component {
 
@@ -11,24 +13,22 @@ class App extends Component {
   }
 
   componentDidMount() {
-
-    // fetch(`https://api.openweathermap.org/data/2.5/weatherData?lat=35&lon=139&APPID=${this.state.apiKey}`)
-    //     .then((response) => ( response.json()))
-    //     .then((data) => console.log(data))
-    //     .catch((e) => console.log(e))
-    
         this.askForPosition();
     }
   
     getInfoWithCoords = (latitude, longitude) => {
       // corriger précision geolocalisation manuellement
-      latitude -= 0.120988;
-      longitude += 0.0722;
+      if(detectBrowser() === "Firefox"){
+        latitude -= 0.120988;
+        longitude += 0.0722;
+      }
+
 
       let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${this.state.apiKey}`
       fetch(url)
       .then((response) => ( response.json()))
       .then((data) => {
+        console.log(data)
         this.setState({weatherData: data})
       })
       .catch((e) => console.log(e))
