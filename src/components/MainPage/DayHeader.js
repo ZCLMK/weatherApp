@@ -28,6 +28,7 @@ class DayHeader extends Component {
       "broken clouds": "broken_clouds.svg",
       "shower rain" : "shower_rain.svg",
       "rain": "rain.svg",
+      "light rain": "light_rain.svg",
       "thunderstorm" : "thunderstorm.svg",
       "snow": "snow.svg",
       "mist": "mist.svg"

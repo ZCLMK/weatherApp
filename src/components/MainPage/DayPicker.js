@@ -7,7 +7,7 @@ render(){
     let dates = sortedValues.map((item, index) => {
       if(item.length >= 1){
         return (
-          <div id="day-tab" key={index}>
+          <div id="day-tab" key={index} onClick={() => this.props.handleDaySelection(index)}>
              <p id="day-date">
              {this.props.formatDate(item[0]).split(' ')[0]}
              </p> 

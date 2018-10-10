@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import PageHeader from "./PageHeader";
 import DayPicker from "./DayPicker";
 import DayHeader from './DayHeader';
+import DayChart from "./DayChart";
 
 class MainPage extends Component {
 
       state = {
         sortedData: null,
-        isToday: true
+        selectedDay: 0
       }
 
   componentWillMount() {
    this.sortDataByDate();
   }
+  //-------------------------------------------------------------------------------
   
   sortDataByDate = () => {
     const data = this.props.weatherData.list;
@@ -39,8 +41,10 @@ class MainPage extends Component {
   this.setState({sortedData}, () => {
     this.formatDate(this.state.sortedData[0][0])
   });
-
 }
+
+//-------------------------------------------------------------------------------
+
 
 formatDate = (dataItem) => {
   let asDate = new Date(dataItem.dt_txt);
@@ -50,14 +54,24 @@ formatDate = (dataItem) => {
   return formattedDate = `${formattedDate[0].slice(0,3)} ${formattedDate[1]} ${formattedDate[2].slice(0,3)} `;
 }
 
+//-------------------------------------------------------------------------------
+
+  handleDaySelection = (index) => {
+    this.setState({selectedDay: index});
+  }
 
   render(){
-    
+    let selectDayData = this.state.sortedData[this.state.selectedDay];
     return (  
     <div id="main-page">
        <PageHeader currentCity={this.props.weatherData.city.name}/> 
-       <DayPicker sortedData={this.state.sortedData} formatDate={this.formatDate} /> 
+       <DayPicker 
+       sortedData={this.state.sortedData}
+       formatDate={this.formatDate}
+       handleDaySelection={this.handleDaySelection} 
+      /> 
        <DayHeader sortedData={this.state.sortedData} />
+       <DayChart data={this.state.sortedData} selectedDay={selectDayData} />
     </div>
     )
   }

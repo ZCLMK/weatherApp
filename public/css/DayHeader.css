@@ -1,6 +1,6 @@
 #day-header {
-  border: white solid 1px;
-  height: 35vh;
+  border-bottom: white solid 1px;
+  height: 20vh;
   width: 100%; }
   #day-header img {
     height: 60px;

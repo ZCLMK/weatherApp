@@ -55,10 +55,6 @@ body {
 #root {
   height: 100%; }
 
-#main-page {
-  height: 100%;
-  width: 100%; }
-
 #page-header {
   height: 80px;
   width: 100%;
@@ -70,9 +66,15 @@ body {
 h1 {
   font-size: 1.6em; }
 
+#temperature-chart {
+  background-color: red;
+  height: 400px;
+  width: 100%;
+  z-index: 1000; }
+
 #day-header {
-  border: white solid 1px;
-  height: 35vh;
+  border-bottom: white solid 1px;
+  height: 20vh;
   width: 100%; }
   #day-header img {
     height: 60px;
@@ -97,3 +99,7 @@ h1 {
   border: .5px solid white;
   border-radius: 5px;
   font-size: .85em; }
+
+#main-page {
+  height: 100%;
+  width: 100%; }
