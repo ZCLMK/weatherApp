@@ -67,7 +67,7 @@ h1 {
   font-size: 1.6em; }
 
 #temperature-chart {
-  background-color: red;
+  background-color: #000f64;
   height: 400px;
   width: 100%;
   z-index: 1000; }

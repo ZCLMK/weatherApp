@@ -14,9 +14,7 @@ class DayHeader extends Component {
   
   //-------------------------------------------------------------------------------
   
-  kelvinToCelsius = (temp) => {
-  return String(Math.round(Number(temp) - 273.15));
-  }
+
 //-------------------------------------------------------------------------------
 
   getWeatherIcon = (description) => {
@@ -47,8 +45,8 @@ class DayHeader extends Component {
       return Number(item.main.temp)
     })
     // Récupérer la temp. min et max en kelvin
-    let minTemp = this.kelvinToCelsius(Math.min(...temperatures));
-    let maxTemp = this.kelvinToCelsius(Math.max(...temperatures));
+    let minTemp = this.props.kelvinToCelsius(Math.min(...temperatures));
+    let maxTemp = this.props.kelvinToCelsius(Math.max(...temperatures));
 
     return [minTemp, maxTemp];
   }
@@ -56,7 +54,7 @@ class DayHeader extends Component {
   //-------------------------------------------------------------------------------
   
   render(){
-    let currentDayTemp = this.kelvinToCelsius(this.props.sortedData[0][0]["main"]["temp"]);
+    let currentDayTemp = this.props.kelvinToCelsius(this.props.sortedData[0][0]["main"]["temp"]);
     let currentDayDescription = this.getWeatherIcon(this.props.sortedData[0][0]["weather"][0]["description"]);
     return (
     <div id="day-header">

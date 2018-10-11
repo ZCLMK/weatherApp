@@ -4,8 +4,45 @@ import { defaults } from 'react-chartjs-2';
 // Disable animating charts by default.
 defaults.global.animation = false;
 
+
+ class DayChart extends Component {
+
+  componentDidMount() {
+    // console.log(this.props.dayData)
+    this.getTemperatures();
+    this.getCurrentHours();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps !== this.props){
+      this.getCurrentHours();
+      this.getTemperatures();
+    }
+
+    
+  }
+  formatHour = (hourString) => {
+    return hourString.substring(11, 16).replace(":", "h");
+  }
+  
+  getCurrentHours = () => {
+    const hours = this.props.dayData.map((dataset) => this.formatHour(dataset.dt_txt)); 
+    return hours;
+  }
+
+  getTemperatures = () => {
+    const temperatures = this.props.dayData.map(dataset => {
+      return Number(this.props.kelvinToCelsius(dataset.main.temp)) ;
+  })
+  console.log('RECALCULATING TEMPERATURES')
+  return temperatures;
+}
+
+  render() {
+
+// const hours = dayData.map((dataset) => dataset.dt_txt); 
+
 const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: this.getCurrentHours(),
   datasets: [
     {
       label: 'My First dataset',
@@ -14,26 +51,17 @@ const data = {
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
+      data: this.getTemperatures()
     }
   ]
 };
-
- class DayChart extends Component {
-
-  componentDidMount() {
-    console.log(this.props.data)
-  }
-  
-
-  render() {
     return (
       <div>
         <h2>Bar Example (custom size)</h2>
         <Line
           data={data}
           width={60}
-          height={40}
+          height={20}
           options={{
             maintainAspectRatio: true
           }}

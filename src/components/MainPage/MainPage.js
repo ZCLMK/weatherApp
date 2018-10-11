@@ -55,13 +55,20 @@ formatDate = (dataItem) => {
 }
 
 //-------------------------------------------------------------------------------
+  kelvinToCelsius = (temp) => {
+    return String(Math.round(Number(temp) - 273.15));
+    }
+//-------------------------------------------------------------------------------
 
   handleDaySelection = (index) => {
     this.setState({selectedDay: index});
   }
 
+  //-------------------------------------------------------------------------------
+  
+
   render(){
-    let selectDayData = this.state.sortedData[this.state.selectedDay];
+    // let selectDayData = ;
     return (  
     <div id="main-page">
        <PageHeader currentCity={this.props.weatherData.city.name}/> 
@@ -70,8 +77,14 @@ formatDate = (dataItem) => {
        formatDate={this.formatDate}
        handleDaySelection={this.handleDaySelection} 
       /> 
-       <DayHeader sortedData={this.state.sortedData} />
-       <DayChart data={this.state.sortedData} selectedDay={selectDayData} />
+       <DayHeader 
+       sortedData={this.state.sortedData} 
+       kelvinToCelsius={this.kelvinToCelsius} 
+       />
+       <DayChart 
+       dayData={this.state.sortedData[this.state.selectedDay]}
+       kelvinToCelsius={this.kelvinToCelsius}
+      />
     </div>
     )
   }
