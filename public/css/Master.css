@@ -66,11 +66,14 @@ body {
 h1 {
   font-size: 1.6em; }
 
-#temperature-chart {
-  background-color: #000f64;
-  height: 400px;
+#chart-wrapper {
+  background-color: #a1aef3;
+  min-height: 50vh;
   width: 100%;
   z-index: 1000; }
+  #chart-wrapper canvas {
+    min-height: 150px;
+    max-height: 50vh; }
 
 #day-header {
   border-bottom: white solid 1px;
@@ -102,4 +105,5 @@ h1 {
 
 #main-page {
   height: 100%;
-  width: 100%; }
+  min-width: 350px;
+  max-width: 700px; }

@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import React, { Component } from 'react';
 import { defaults } from 'react-chartjs-2';
 // Disable animating charts by default.
@@ -34,6 +34,7 @@ defaults.global.animation = false;
       return Number(this.props.kelvinToCelsius(dataset.main.temp)) ;
   })
   console.log('RECALCULATING TEMPERATURES')
+  console.log(temperatures, this.props.dayData)
   return temperatures;
 }
 
@@ -51,20 +52,49 @@ const data = {
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
+      responsive: true,	
       data: this.getTemperatures()
     }
   ]
 };
     return (
-      <div>
+      <div id="chart-wrapper">
         <h2>Bar Example (custom size)</h2>
-        <Line
+        <Bar
           data={data}
-          width={60}
-          height={20}
+          width={100}
           options={{
-            maintainAspectRatio: true
-          }}
+            maintainAspectRatio: false,
+            barPercentage: 1,
+            
+            scales: {
+                    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: false,
+                                steps: 10,
+                                stepValue: 5,
+                                min: Math.floor(Math.min(...this.getTemperatures())/ 5) * 5,
+                                max: Math.ceil(Math.max(...this.getTemperatures()) / 5) * 5
+                            }
+                        }],
+                    layout: {
+                    padding: {
+                        left: 5,
+                        right: 5,
+                        top: 0,
+                        bottom: 0
+                    }
+                  }
+                }
+           }}
         />
       </div>
     );

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 class DayHeader extends Component {
 
-  state = {
-    isDay: true,
-    isNight: false
-  }
 
   componentDidMount() {
     // console.log(this.getWeatherIcon(this.props.sortedData[0][0]["weather"][0]["description"]));    

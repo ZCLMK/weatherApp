@@ -84,6 +84,7 @@ formatDate = (dataItem) => {
        <DayChart 
        dayData={this.state.sortedData[this.state.selectedDay]}
        kelvinToCelsius={this.kelvinToCelsius}
+       selectedDay={this.state.selectedDay}
       />
     </div>
     )
