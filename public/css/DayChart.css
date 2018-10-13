@@ -1,8 +1,0 @@
-#chart-wrapper {
-  background-color: #a1aef3;
-  min-height: 50vh;
-  width: 100%;
-  z-index: 1000; }
-  #chart-wrapper canvas {
-    min-height: 150px;
-    max-height: 50vh; }

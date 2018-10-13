@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import MainPage from './components/MainPage/MainPage';
 import Aux from './hoc/Aux';
+import AddCityBtn from './components/AddCityBtn';
 import detectBrowser from './detectBrowser.js';
-
+import CityPicker from './components/CityPicker/CityPicker';    
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class App extends Component {
 
   state = {
     apiKey: "a60fc722ff878a98f10dc57fc7badffb",
     geolocation : false,
-    weatherData: null
+    weatherData: null,
+    choosingCity: false
   }
 
   componentDidMount() {
@@ -55,16 +58,30 @@ class App extends Component {
       this.getInfoWithCoords(position.coords.latitude, position.coords.longitude)      
       }
     
+      handleToggleClick = () => {
+        this.setState({choosingCity: !this.state.choosingCity})
+      }
 
   render(){
      let mainPage = this.state.weatherData ? 
      <MainPage weatherData={this.state.weatherData} /> : <h1>Loading</h1> ;
-    
+     let iconName = this.state.choosingCity ? "/exit.svg" : "/add.svg";
+    let toggleDestination = this.state.choosingCity ? "/" : "/choix-ville"
     
      return (
-       <Aux>
-        {mainPage}
-      </Aux>
+
+
+        <Router >
+          
+          <Aux>
+            <Link to={toggleDestination}>
+              <AddCityBtn iconName={iconName} handleToggleClick={this.handleToggleClick}/>
+            </Link>
+            <Route path="/" component={CityPicker} />
+            {mainPage}
+          </Aux>
+
+        </Router>
     )
   }
 }

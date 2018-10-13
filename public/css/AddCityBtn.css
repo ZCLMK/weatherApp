@@ -1,0 +1,12 @@
+#add-city-btn {
+  z-index: 300;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 42px;
+  height: 42px; }
+  #add-city-btn:hover {
+    background-color: #b1d8f1; }
+  #add-city-btn img {
+    width: 42px;
+    height: 42px; }

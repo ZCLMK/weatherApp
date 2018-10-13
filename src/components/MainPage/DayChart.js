@@ -46,7 +46,7 @@ const data = {
   labels: this.getCurrentHours(),
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'Températures prévues',
       backgroundColor: 'rgba(0, 15, 100, 1)',
       borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
@@ -59,7 +59,6 @@ const data = {
 };
     return (
       <div id="chart-wrapper">
-        <h2>Bar Example (custom size)</h2>
         <Bar
           data={data}
           width={100}
@@ -72,7 +71,7 @@ const data = {
                             display: true,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Month'
+                                labelString: 'Heure'
                             }
                         }],
                     yAxes: [{
