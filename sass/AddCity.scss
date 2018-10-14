@@ -6,7 +6,18 @@
   display:flex;
   justify-content: center;
   margin-top: $mg-top;
-    input{
+  position: relative;
+    #add-city-input{
      font-size: 1.8em;
+     background: none;
+     border: none;
+     }
+  }
+  .add-icon-wrapper{
+    position:absolute;
+    right: 20px;
+    #add-city-icon{
+      width: 40px;
+      height: 40px;
     }
-}
+  }

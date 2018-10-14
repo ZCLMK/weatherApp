@@ -33,8 +33,8 @@ defaults.global.animation = false;
     const temperatures = this.props.dayData.map(dataset => {
       return Number(this.props.kelvinToCelsius(dataset.main.temp)) ;
   })
-  console.log('RECALCULATING TEMPERATURES')
-  console.log(temperatures, this.props.dayData)
+  // console.log('RECALCULATING TEMPERATURES')
+  // console.log(temperatures, this.props.dayData)
   return temperatures;
 }
 

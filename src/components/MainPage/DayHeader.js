@@ -27,7 +27,7 @@ class DayHeader extends Component {
       "snow": "snow.svg",
       "mist": "mist.svg"
     }
-    console.log(`${imgDirectory}/${weatherIcons[description]}`)
+    // console.log(`${imgDirectory}/${weatherIcons[description]}`)
   return `${imgDirectory}/${weatherIcons[description]}`;
   }
 

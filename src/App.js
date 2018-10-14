@@ -74,7 +74,6 @@ class App extends Component {
 
 
         <Router >
-          
           <Aux>
             <Link to={toggleDestination}>
               <AddCityBtn choosingCity={this.state.choosingCity} handleToggleClick={this.handleToggleClick}/>
