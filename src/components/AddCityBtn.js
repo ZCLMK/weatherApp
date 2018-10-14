@@ -1,12 +1,17 @@
 import React from 'react';
+import addIcon from '../img/btn-icons/add.svg';
+import exitIcon from '../img/btn-icons/exit.svg';
+
 
 const addCityBtn = (props) => {
-  const pathToIcon = "../../../img/btn-icons" + props.iconName; 
-  const altForIcon = props.iconName === "/add.svg" ? "add a city" : "exit to main page";
+
+  let icon = <img
+   src={props.choosingCity ? exitIcon : addIcon }
+  alt={props.choosingCity ? "ajouter une ville" : "revenir au prévisions météo" }  />
 
   return ( 
   <span id="add-city-btn" onClick={props.handleToggleClick}>
-    <img src={pathToIcon} alt={altForIcon}/>
+    {icon}
   </span>
   )
 }

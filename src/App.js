@@ -26,8 +26,11 @@ class App extends Component {
         longitude += 0.0722;
       }
 
-
       let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${this.state.apiKey}`
+      this.callWeatherApi(url);
+    }
+
+    callWeatherApi = (url) => {
       fetch(url)
       .then((response) => ( response.json()))
       .then((data) => {
@@ -65,7 +68,6 @@ class App extends Component {
   render(){
      let mainPage = this.state.weatherData ? 
      <MainPage weatherData={this.state.weatherData} /> : <h1>Loading</h1> ;
-     let iconName = this.state.choosingCity ? "/exit.svg" : "/add.svg";
     let toggleDestination = this.state.choosingCity ? "/" : "/choix-ville"
     
      return (
@@ -75,9 +77,9 @@ class App extends Component {
           
           <Aux>
             <Link to={toggleDestination}>
-              <AddCityBtn iconName={iconName} handleToggleClick={this.handleToggleClick}/>
+              <AddCityBtn choosingCity={this.state.choosingCity} handleToggleClick={this.handleToggleClick}/>
             </Link>
-            <Route path="/" component={CityPicker} />
+            <Route path="/choix-ville" component={CityPicker} />
             {mainPage}
           </Aux>
 

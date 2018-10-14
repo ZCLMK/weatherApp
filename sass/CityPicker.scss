@@ -1,0 +1,15 @@
+
+#city-picker{
+  position: absolute;
+  height:100%;
+  width:100%;
+  z-index: 200;
+  background-color: $primary-color;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  #city-picker-title{
+    font-size: 2.5em;
+    margin-top: $mg-top;
+  }
+}
