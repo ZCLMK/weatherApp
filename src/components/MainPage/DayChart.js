@@ -80,8 +80,9 @@ const data = {
                                 beginAtZero: false,
                                 steps: 10,
                                 stepValue: 5,
-                                min: Math.floor(Math.min(...this.getTemperatures())/ 5) * 5,
-                                max: Math.ceil(Math.max(...this.getTemperatures()) / 5) * 5
+                                //minimum and maximum temperature rounded to 5 with a + or - 5 degrees margin
+                                min: (Math.floor(Math.min(...this.getTemperatures())/ 5) * 5) - 5,
+                                max: (Math.ceil(Math.max(...this.getTemperatures()) / 5) * 5)  + 5
                             }
                         }],
                     layout: {
