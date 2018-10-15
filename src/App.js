@@ -12,8 +12,11 @@ class App extends Component {
     apiKey: "a60fc722ff878a98f10dc57fc7badffb",
     geolocation : false,
     weatherData: null,
-    choosingCity: false
+    choosingCity: false,
+    // necessary if geolocation is not authorized
+    selectedCity: null
   }
+// SHOULD COMPONENT UPDATE WITH SELECTEDCITY
 
   componentDidMount() {
         this.askForPosition();
@@ -65,20 +68,27 @@ class App extends Component {
         this.setState({choosingCity: !this.state.choosingCity})
       }
 
+      getSelectedCity = (cityName) => {
+        console.log('Got the city in [App]' + cityName);
+        this.setState({selectedCity: cityName});
+      }
+
+
   render(){
-     let mainPage = this.state.weatherData ? 
+     
+    let mainPage = this.state.weatherData ? 
      <MainPage weatherData={this.state.weatherData} /> : <h1>Loading</h1> ;
-    let toggleDestination = this.state.choosingCity ? "/" : "/choix-ville"
-    
-     return (
+    let toggleDestination = this.state.choosingCity ? "/" : "/choix-ville";
+    const fullCityPicker = <CityPicker getSelectedCity={this.getSelectedCity} />
 
-
+         return (
+      
         <Router >
           <Aux>
             <Link to={toggleDestination}>
               <AddCityBtn choosingCity={this.state.choosingCity} handleToggleClick={this.handleToggleClick}/>
             </Link>
-            <Route path="/choix-ville" component={CityPicker} />
+            <Route path="/choix-ville" render={() => fullCityPicker} />
             {mainPage}
           </Aux>
 

@@ -6,8 +6,12 @@ import City from './City/City';
 class CityPicker extends Component{
 
   state = {
-    cities: window.localStorage
+    cities: window.localStorage,
+    selectedCity: 0
   }
+
+  // rerender only if different city selected
+
 
   handleAddCity = (city) => {
     //don't add empty string or string that is already present
@@ -17,6 +21,14 @@ class CityPicker extends Component{
     }
     //reset input
     city.current.value = "";
+  }
+
+  isSelectedCity = (position, cityName) => {
+    // if city in at a different index is selected
+    if(position !== this.state.selectedCity){
+      this.setState({selectedCity: position});
+      this.props.getSelectedCity(cityName)
+    }
   }
 
   updateCities = () => {
@@ -33,10 +45,22 @@ class CityPicker extends Component{
   }
 
   render(){
-
+    // flag : style city if it is the selected one.
+    let isActive = false;
     let cities = Object.values(this.state.cities).map((cityName, index) => {
-      return <City cityName={cityName} key={index} removeCity={this.removeCity} />
-    })
+      
+      isActive = ( index === this.state.selectedCity ) ? true : false ;
+
+      return <City 
+      cityName={cityName} 
+      key={index} 
+      position={index} 
+      removeCity={this.removeCity}
+      isSelectedCity={this.isSelectedCity}
+      active={isActive}
+       />
+   
+  })
     return(
       <div id="city-picker">
         <span id="city-picker-title">Villes</span>

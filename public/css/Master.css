@@ -128,7 +128,7 @@ h1 {
     margin-top: 20px; }
 
 .city {
-  background-color: rgba(255, 255, 255, 0.521);
+  background-color: #2c68c4;
   width: 100%;
   min-height: 60px;
   display: flex;
@@ -141,6 +141,9 @@ h1 {
     right: 20px;
     width: 40px;
     height: 40px; }
+
+.active {
+  background-color: #4c83d7; }
 
 #add-city {
   width: 100%;
