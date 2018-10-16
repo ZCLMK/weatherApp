@@ -34,6 +34,7 @@ class App extends Component {
     }
 
     callWeatherApi = (url) => {
+      
       fetch(url)
       .then((response) => ( response.json()))
       .then((data) => {
@@ -67,12 +68,20 @@ class App extends Component {
       handleToggleClick = () => {
         this.setState({choosingCity: !this.state.choosingCity})
       }
-
+/**
+ * 1.get selected city's Name
+ * 2.calls API for data about city
+ */
       getSelectedCity = (cityName) => {
-        console.log('Got the city in [App]' + cityName);
-        this.setState({selectedCity: cityName});
+        let someUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=${this.state.apiKey}`
+        // let citySearchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${this.state.apiKey}`
+        this.setState({selectedCity: cityName}, this.callWeatherApi(someUrl));
+        console.log('city is ' + cityName);
       }
 
+      loadCitiesJson = () => {
+        
+      }
 
   render(){
      

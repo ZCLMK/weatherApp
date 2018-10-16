@@ -27,7 +27,7 @@ class CityPicker extends Component{
     // if city in at a different index is selected
     if(position !== this.state.selectedCity){
       this.setState({selectedCity: position});
-      this.props.getSelectedCity(cityName)
+      this.props.getSelectedCity(cityName);
     }
   }
 
