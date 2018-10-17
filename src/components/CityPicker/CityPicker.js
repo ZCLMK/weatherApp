@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AddCity from './AddCity/AddCity';
 import City from './City/City';
+import Cities from '../../newcities.json';
+
 
 
 class CityPicker extends Component{
@@ -10,6 +12,10 @@ class CityPicker extends Component{
     selectedCity: 0
   }
 
+  componentDidMount() {
+    console.log(this.findMatches('Paris'));
+  }
+  
   // rerender only if different city selected
 
 
@@ -23,6 +29,8 @@ class CityPicker extends Component{
     city.current.value = "";
   }
 
+  // implement a typeahead for cities using json file.
+
   isSelectedCity = (position, cityName) => {
     // if city in at a different index is selected
     if(position !== this.state.selectedCity){
@@ -31,10 +39,13 @@ class CityPicker extends Component{
     }
   }
 
+  
   updateCities = () => {
   // get current cities array from local storage
     this.setState({cities: Object.values(window.localStorage).reverse()})
   }
+
+
 
   removeCity = (text) => {
     //get the current position of city as its key may not reflect it because of earlier removals
@@ -43,6 +54,19 @@ class CityPicker extends Component{
     localStorage.removeItem(lsKeys[position]);
     this.updateCities();
   }
+
+  //------------------------------------- AUTOCOMPLETION OF CITIES ------------------------------------------
+
+  findMatches = (currentInput, cities = Cities) => {
+
+    console.log('matching cities!');
+      return cities.filter((city) => {
+        const regexp = new RegExp(currentInput, 'gi');
+        return city.name.match(regexp);
+       })  
+  }
+  
+
 
   render(){
     // flag : style city if it is the selected one.
