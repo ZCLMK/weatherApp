@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AddCity from './AddCity/AddCity';
 import City from './City/City';
-import Cities from '../../newcities.json';
+import Cities from '../../cities.js';
+
 
 
 
@@ -13,7 +14,7 @@ class CityPicker extends Component{
   }
 
   componentDidMount() {
-    console.log(this.findMatches('Paris'));
+    console.log(this.findMatches('alam'));
   }
   
   // rerender only if different city selected
@@ -46,7 +47,6 @@ class CityPicker extends Component{
   }
 
 
-
   removeCity = (text) => {
     //get the current position of city as its key may not reflect it because of earlier removals
     let position = Object.values(window.localStorage).indexOf(text);
@@ -59,15 +59,14 @@ class CityPicker extends Component{
 
   findMatches = (currentInput, cities = Cities) => {
 
-    console.log('matching cities!');
+       if(currentInput.length >= 4){
       return cities.filter((city) => {
         const regexp = new RegExp(currentInput, 'gi');
         return city.name.match(regexp);
-       })  
+      })  
+    }
   }
   
-
-
   render(){
     // flag : style city if it is the selected one.
     let isActive = false;
