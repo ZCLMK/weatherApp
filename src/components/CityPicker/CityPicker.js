@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import AddCity from './AddCity/AddCity';
 import City from './City/City';
-import Cities from '../../cities.js';
-
-
+import Cities from '../../cities.json';
 
 
 class CityPicker extends Component{
 
   state = {
     cities: window.localStorage,
-    selectedCity: 0
+    selectedCity: 0,
+    matchingCities: []
   }
 
   componentDidMount() {
-    console.log(this.findMatches('alam'));
-  }
+    this.findMatches('phuket', Cities); 
+ }
   
   // rerender only if different city selected
 
 
   handleAddCity = (city) => {
-    //don't add empty string or string that is already present
-    if(city.current.value && !Object.values(this.state.cities).includes(city.current.value)){
-      localStorage.setItem(`city${window.localStorage.length}`, city.current.value );
-      this.updateCities();
-    }
+
+      // this.updateCities();
+    // this.findMatches(city.current.value);
     //reset input
     city.current.value = "";
   }
@@ -40,7 +37,6 @@ class CityPicker extends Component{
     }
   }
 
-  
   updateCities = () => {
   // get current cities array from local storage
     this.setState({cities: Object.values(window.localStorage).reverse()})
@@ -58,14 +54,15 @@ class CityPicker extends Component{
   //------------------------------------- AUTOCOMPLETION OF CITIES ------------------------------------------
 
   findMatches = (currentInput, cities = Cities) => {
-
-       if(currentInput.length >= 4){
-      return cities.filter((city) => {
-        const regexp = new RegExp(currentInput, 'gi');
-        return city.name.match(regexp);
-      })  
-    }
+    // first letter of input city capitalized
+    const firstLetter = currentInput[0].toUpperCase();
+    let matchingCities = cities[firstLetter].filter(city => {
+      return city.name.toUpperCase() === currentInput.toUpperCase();
+    })
+    //  an array of all the cities that have the name typed by the user
+    this.setState({matchingCities})
   }
+
   
   render(){
     // flag : style city if it is the selected one.
