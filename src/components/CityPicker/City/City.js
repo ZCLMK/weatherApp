@@ -6,13 +6,15 @@ const city = ( props ) => {
   let activeClass = props.active ? " active" : "" ;
   let className = `city${activeClass}`
   return (
-    <div className={className} onClick={() => props.isSelectedCity(props.position, props.cityName)}> 
-      <p>{props.cityName}</p>
-      <p onClick={() => props.removeCity(props.cityName)}><img 
-      src={RemoveIcon} 
-      alt="supprimer cette ville"
-      className="remove-city-icon" /></p>
+
+    <div className={className}> 
+            <p onClick={() => props.isSelectedCity(props.cityId)}>{props.cityName} </p>
+            <p onClick={() => props.removeCity(props.cityIndex)}><img
+            src={RemoveIcon} 
+            alt="supprimer cette ville"
+            className="remove-city-icon" /></p>
     </div>
+       
   )
 }
 

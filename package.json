@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass": "node-sass -w sass/Master.scss -o public/css --recursive"
+    "sass": "node-sass -w sass/Master.scss -o public/css/"
   },
   "eslintConfig": {
     "extends": "react-app"

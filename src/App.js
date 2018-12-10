@@ -22,23 +22,12 @@ class App extends Component {
         this.askForPosition();
     }
   
-    getInfoWithCoords = (latitude, longitude) => {
-      // corriger précision geolocalisation manuellement
-      if(detectBrowser() === "Firefox"){
-        latitude -= 0.120988;
-        longitude += 0.0722;
-      }
-
-      let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${this.state.apiKey}`
-      this.callWeatherApi(url);
-    }
-
     callWeatherApi = (url) => {
       
       fetch(url)
       .then((response) => ( response.json()))
       .then((data) => {
-        console.log(data, 'hello')
+        console.log(data)
         this.setState({weatherData: data})
       })
       .catch((e) => console.log(e))
@@ -68,20 +57,28 @@ class App extends Component {
       handleToggleClick = () => {
         this.setState({choosingCity: !this.state.choosingCity})
       }
+
+    getInfoWithCoords = (latitude, longitude) => {
+        // corriger précision geolocalisation manuellement
+        // if(detectBrowser() === "Firefox"){
+         
+        //   latitude -= 0.120988;
+        //   longitude += 0.0722;
+        // }
+        console.log(`lat : ${latitude} long: ${longitude}`)
+        let url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${this.state.apiKey}`
+        this.callWeatherApi(url);
+     }
 /**
  * 1.get selected city's Name
  * 2.calls API for data about city
  */
-      getSelectedCity = (cityName) => {
-        let someUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=${this.state.apiKey}`
-        // let citySearchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${this.state.apiKey}`
-        this.setState({selectedCity: cityName}, this.callWeatherApi(someUrl));
-        console.log('city is ' + cityName);
+      getSelectedCity = (cityId) => {
+        let idUrl = `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${this.state.apiKey}`
+        this.setState({selectedCity: cityId}, this.callWeatherApi(idUrl));
+        console.log('city is: ' + cityId);
       }
 
-      loadCitiesJson = () => {
-        
-      }
 
   render(){
      

@@ -11,12 +11,25 @@ class MainPage extends Component {
         selectedDay: 0
       }
 
-  componentWillMount() {
-   this.sortDataByDate();
-  }
+    //   feed new data to be sorted when a new city is selected by the user
+     componentDidUpdate(prevProps, prevState) {
+         if(prevProps.weatherData.city.name != this.props.weatherData.city.name){
+             this.sortDataByDate();
+         }
+     }
+     
+
+     componentDidMount() {
+         this.sortDataByDate();
+     }
+     
   //-------------------------------------------------------------------------------
   
   sortDataByDate = () => {
+    
+    console.log("SORT BY DATE in [sortdatabydate]");
+    console.log(this.props.weatherData);
+    
     const data = this.props.weatherData.list;
     let counter = 0;
     // console.log(data)
@@ -28,6 +41,7 @@ class MainPage extends Component {
     let dataExceptFirst = data.slice(1);
 
     dataExceptFirst.forEach(item => {
+        // if data is from the same day 
       if(item['dt_txt'].slice(0,10) === sortedData[counter][0]["dt_txt"].slice(0,10)){
         sortedData[counter].push(item);
       }else{
@@ -35,12 +49,14 @@ class MainPage extends Component {
         sortedData[counter].push(item);
       }
   })
-  //  remplacer les 8 prochaines valeurs (sortedData[0]) par les 8 premiers objest (8 x 3 pour 24h)
+  //  remplacer les 8 prochaines valeurs (sortedData[0]) par les 8 premiers objets (8 x 3 pour 24h)
   sortedData[0] = data.slice(0, 7);
   // update state
-  this.setState({sortedData}, () => {
+  this.setState({sortedData : sortedData}, () => {
     this.formatDate(this.state.sortedData[0][0])
-  });
+    console.log(this.state.sortedData);
+});
+
 }
 
 //-------------------------------------------------------------------------------
@@ -67,26 +83,31 @@ formatDate = (dataItem) => {
   //-------------------------------------------------------------------------------
   
   render(){
-    // let selectDayData = ;
-    return (  
-    <div id="main-page">
-       <PageHeader currentCity={this.props.weatherData.city.name}/> 
-       <DayPicker 
-       sortedData={this.state.sortedData}
-       formatDate={this.formatDate}
-       handleDaySelection={this.handleDaySelection} 
-      /> 
-       <DayHeader 
-       sortedData={this.state.sortedData} 
-       kelvinToCelsius={this.kelvinToCelsius} 
-       />
-       <DayChart 
-       dayData={this.state.sortedData[this.state.selectedDay]}
-       kelvinToCelsius={this.kelvinToCelsius}
-       selectedDay={this.state.selectedDay}
-      />
-    </div>
-    )
+   
+    let mainPageVisuals = 
+
+     this.state.sortedData ? 
+            <div id="main-page">
+                    <PageHeader currentCity={this.props.weatherData.city.name}/> 
+                    <DayPicker  
+                    sortedData={this.state.sortedData}
+                    formatDate={this.formatDate}
+                    handleDaySelection={this.handleDaySelection} 
+                    /> 
+                    <DayHeader 
+                    sortedData={this.state.sortedData} 
+                    kelvinToCelsius={this.kelvinToCelsius} 
+                    />
+                    <DayChart 
+                    dayData={this.state.sortedData[this.state.selectedDay]}
+                    kelvinToCelsius={this.kelvinToCelsius}
+                    selectedDay={this.state.selectedDay}
+                    />
+            </div> 
+             :
+        <h1> NOTE THERE YET </h1>;
+    // render all three only when this.state.sortedData is available 
+    return  mainPageVisuals
   }
 }
 

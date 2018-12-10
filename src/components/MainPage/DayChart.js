@@ -1,4 +1,4 @@
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import React, { Component } from 'react';
 import { defaults } from 'react-chartjs-2';
 // Disable animating charts by default.
@@ -17,8 +17,6 @@ defaults.global.animation = false;
       this.getCurrentHours();
       this.getTemperatures();
     }
-
-    
   }
   formatHour = (hourString) => {
     return hourString.substring(11, 16).replace(":", "h");
@@ -33,7 +31,6 @@ defaults.global.animation = false;
     const temperatures = this.props.dayData.map(dataset => {
       return Number(this.props.kelvinToCelsius(dataset.main.temp)) ;
   })
-  // console.log('RECALCULATING TEMPERATURES')
   // console.log(temperatures, this.props.dayData)
   return temperatures;
 }
@@ -47,8 +44,9 @@ const data = {
   datasets: [
     {
       label: 'Températures prévues',
-      backgroundColor: 'rgba(0, 15, 100, 1)',
+      backgroundColor: 'rgba(233, 0, 0, 0.722)',
       borderColor: 'rgba(255,99,132,1)',
+      pointBackgroundColor: 'rgba(255,255,255,0)',
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
@@ -59,13 +57,12 @@ const data = {
 };
     return (
       <div id="chart-wrapper">
-        <Bar
+        <Line
           data={data}
           width={100}
           options={{
             maintainAspectRatio: false,
             barPercentage: 1,
-            
             scales: {
                     xAxes: [{
                             display: true,
@@ -77,12 +74,13 @@ const data = {
                     yAxes: [{
                             display: true,
                             ticks: {
+                                display: true,
                                 beginAtZero: false,
-                                steps: 10,
+                                steps: 5,
                                 stepValue: 5,
                                 //minimum and maximum temperature rounded to 5 with a + or - 5 degrees margin
-                                min: (Math.floor(Math.min(...this.getTemperatures())/ 5) * 5) - 5,
-                                max: (Math.ceil(Math.max(...this.getTemperatures()) / 5) * 5)  + 5
+                                min: (Math.floor(Math.min(...this.getTemperatures())/ 5) * 5),
+                                max: (Math.ceil(Math.max(...this.getTemperatures()) / 5) * 5) 
                             }
                         }],
                     layout: {
