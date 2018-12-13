@@ -1,34 +1,36 @@
 import React, { Component } from 'react';
+import sunny from '../../img/icons/sunny.svg'
+import fewClouds from '../../img/icons/few_clouds.svg'
+import scatteredClouds from '../../img/icons/scattered_clouds.svg'
+import brokenClouds from '../../img/icons/broken_clouds.svg'
+import showerRain from '../../img/icons/shower_rain.svg'
+import rain from '../../img/icons/rain.svg'
+import lightRain from '../../img/icons/light_rain.svg'
+import flash from '../../img/icons/flash.svg'
+import snow from '../../img/icons/snow.svg'
+import mist from '../../img/icons/mist.svg'
+import moderateRain from '../../img/icons/rain.svg'
+
 
 class DayHeader extends Component {
 
-
-  componentDidMount() {
-    // console.log(this.getWeatherIcon(this.props.sortedData[0][0]["weather"][0]["description"]));    
-
-  }
-  
-  //-------------------------------------------------------------------------------
-  
-
-//-------------------------------------------------------------------------------
-
   getWeatherIcon = (description) => {
-    const imgDirectory = '../../../img/icons'
+  
     const weatherIcons = {
-      "clear sky": "sunny.svg",
-      "few clouds": "few_clouds.svg",
-      "scattered clouds": "scattered_clouds.svg",
-      "broken clouds": "broken_clouds.svg",
-      "shower rain" : "shower_rain.svg",
-      "rain": "rain.svg",
-      "light rain": "light_rain.svg",
-      "thunderstorm" : "thunderstorm.svg",
-      "snow": "snow.svg",
-      "mist": "mist.svg"
+      "clear sky": sunny,
+      "few clouds": fewClouds,
+      "scattered clouds": scatteredClouds,
+      "broken clouds": brokenClouds,
+      "shower rain" : showerRain,
+      "rain": rain,
+      "light rain": lightRain,
+      "moderate rain":moderateRain,
+      "flash" :flash,
+      "snow": snow,
+      "mist": mist
     }
-    // console.log(`${imgDirectory}/${weatherIcons[description]}`)
-  return `${imgDirectory}/${weatherIcons[description]}`;
+
+  return `${weatherIcons[description]}`;
   }
 
   //-------------------------------------------------------------------------------
@@ -50,16 +52,17 @@ class DayHeader extends Component {
   //-------------------------------------------------------------------------------
   
   render(){
-    let currentDayTemp = this.props.kelvinToCelsius(this.props.sortedData[0][0]["main"]["temp"]);
-    let currentDayDescription = this.getWeatherIcon(this.props.sortedData[0][0]["weather"][0]["description"]);
+    let currentDayTemp = this.props.kelvinToCelsius(this.props.sortedData[0]["main"]["temp"]);
+    let currentDayDescription = this.getWeatherIcon(this.props.sortedData[0]["weather"][0]["description"]);
     return (
     <div id="day-header">
       <img src={currentDayDescription} alt="" />
+
       <h1>{currentDayTemp}</h1>
       <span id="minmax">
-      {this.getMinMaxTemp(this.props.sortedData[0])[0]}
+      {this.getMinMaxTemp(this.props.sortedData)[0]}
       /
-      {this.getMinMaxTemp(this.props.sortedData[0])[1]}
+      {this.getMinMaxTemp(this.props.sortedData)[1]}
 
       </span>
     </div>

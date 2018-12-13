@@ -4,6 +4,8 @@ import City from './City/City';
 import Cities from '../../other/cities.json';
 import Dropdown from '../../hoc/Dropdown';
 import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
 
 
 
@@ -146,6 +148,8 @@ class CityPicker extends Component{
             handleChooseCity={this.handleChooseCity}
         >
         </Dropdown>
+
+        <Button variant="contained" color="primary">Hello World</Button>
 
       </div>
 
