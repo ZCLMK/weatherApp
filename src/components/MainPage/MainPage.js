@@ -8,7 +8,7 @@ import DayChart from "./DayChart";
 const mainPage = (props) => {
    
         let mainPageVisuals = props.dayData ? 
-                <div>
+                <div className="pane">
                         <PageHeader currentCity={props.weatherData.city.name}/> 
                         <DayPicker  
                         dayData={props.dayData}

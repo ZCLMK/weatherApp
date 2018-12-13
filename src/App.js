@@ -56,9 +56,9 @@ class App extends Component {
       this.getInfoWithCoords(position.coords.latitude, position.coords.longitude)      
       }
     
-      handleToggleClick = () => {
+    handleToggleClick = () => {
         this.setState({choosingCity: !this.state.choosingCity})
-      }
+    }
 
     getInfoWithCoords = (latitude, longitude) => {
         // corriger précision geolocalisation manuellement (a été corrigé sur FIrefox)
@@ -79,7 +79,6 @@ class App extends Component {
         this.setState({selectedCity: cityId}, this.callWeatherApi(idUrl));
         console.log('city is: ' + cityId);
       }
-
 
   render(){
      

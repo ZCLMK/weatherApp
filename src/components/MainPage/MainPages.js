@@ -80,7 +80,7 @@ class MainPages extends Component {
         let mainPages = this.state.sortedData ?  Object.values(this.state.sortedData).map((dayData, i) => {
             return (
                 // "float:left" and "width: 100%"" are important for the swipe functionality
-                <div key={i} className="pane"> 
+                <div key={i} className="pane" > 
                     <MainPage 
                         dayData={dayData} 
                         weatherData={this.props.weatherData}
@@ -99,6 +99,7 @@ class MainPages extends Component {
             return(
             <Aux>    
                 <ReactSwipe
+                style={style}
                 className="carousel"
                 swipeOptions={swipeOptions}
                 ref={el => (reactSwipeEl = el)}
@@ -121,5 +122,25 @@ const swipeOptions = {
     disableScroll: true
 }
 
+const style = {
+    container: {
+      overflow: 'hidden',
+      visibility: 'hidden',
+      position: 'relative'
+    },
+    wrapper: {
+      overflow: 'hidden',
+      position: 'relative',
+      margin: '0px 0px 0px 1.5vw' 
+      //this correct the overlap of each pane with the pane to its right... needs testing on other screens
+    },
+    child: {
+      float: 'left',
+      width: '100%',
+      position: 'relative',
+      transitionProperty: 'transform',
+      
+    }
+  }
 
 export default MainPages ;

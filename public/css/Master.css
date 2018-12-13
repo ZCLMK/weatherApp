@@ -166,12 +166,7 @@ h1 {
     width: 40px;
     height: 40px; }
 
-#main-page {
-  height: 100%;
-  width: 100vw; }
-
 .pane {
-  position: relative;
   float: left;
   overflow: hidden;
   width: 100%; }
